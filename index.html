@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The $1.5 Trillion Convergence: AI × EdTech × HRTech | Market Analysis</title>
+    <meta name="description" content="A data-driven analysis of the convergence between AI, EdTech, and HRTech markets, with special focus on African opportunities.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-bg: #FFFFFF;
+            --charcoal: #2C3E50;
+            --charcoal-light: #34495E;
+            --gray: #ECF0F1;
+            --gray-dark: #7F8C8D;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --coral: #FF6B6B;
+            --emerald: #00D084;
+            --golden: #FFC312;
+            --mint: #10AC84;
+            --orange: #FF9F43;
+            --shadow: rgba(44, 62, 80, 0.08);
+            --shadow-hover: rgba(44, 62, 80, 0.15);
+            --gradient-start: #FFFFFF;
+            --gradient-end: #F9FAFB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral) 0%, var(--emerald) 50%, var(--golden) 100%);
+            width: 0;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Card Base */
+        .glass-card {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Number Animation */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .summary-card h3 {
+            animation: countUp 0.6s ease-out forwards;
+        }
+
+        .summary-card:nth-child(1) h3 { animation-delay: 0.1s; }
+        .summary-card:nth-child(2) h3 { animation-delay: 0.2s; }
+        .summary-card:nth-child(3) h3 { animation-delay: 0.3s; }
+        .summary-card:nth-child(4) h3 { animation-delay: 0.4s; }
+
+        /* Floating Navbar */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            display: flex;
+            gap: 2rem;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .navbar a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar a:hover {
+            color: var(--coral);
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 4px 16px var(--shadow);
+            border-radius: 20px;
+            padding: 4rem;
+            max-width: 900px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--charcoal);
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--gray);
+            color: var(--charcoal);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-dark);
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--charcoal);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--charcoal-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-hover);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--charcoal);
+            border: 2px solid var(--charcoal);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--gray);
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section#summary {
+            background: linear-gradient(180deg, var(--primary-bg) 0%, var(--gray) 50%, var(--primary-bg) 100%);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: -0.01em;
+            color: var(--charcoal);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Executive Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .summary-card {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            border-left: 4px solid;
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .summary-card:nth-child(1) {
+            border-left-color: var(--coral);
+        }
+
+        .summary-card:nth-child(2) {
+            border-left-color: var(--emerald);
+        }
+
+        .summary-card:nth-child(3) {
+            border-left-color: var(--golden);
+        }
+
+        .summary-card:nth-child(4) {
+            border-left-color: var(--mint);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        .summary-card h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-card:nth-child(1) h3 { color: var(--coral); }
+        .summary-card:nth-child(2) h3 { color: var(--emerald); }
+        .summary-card:nth-child(3) h3 { color: var(--golden); }
+        .summary-card:nth-child(4) h3 { color: var(--mint); }
+
+        .summary-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            height: 400px;
+        }
+
+        .chart-container canvas {
+            max-height: 100%;
+        }
+
+        /* Players Grid */
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .player-card {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--emerald));
+        }
+
+        .player-card:nth-child(1)::before { background: var(--coral); }
+        .player-card:nth-child(2)::before { background: var(--emerald); }
+        .player-card:nth-child(3)::before { background: var(--golden); }
+        .player-card:nth-child(4)::before { background: var(--orange); }
+
+        .player-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        .player-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+
+        .player-card .segment {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .player-card .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .player-card .metric strong {
+            color: var(--charcoal);
+        }
+
+        .player-card .growth {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .player-card:nth-child(1) .growth { color: var(--coral); }
+        .player-card:nth-child(2) .growth { color: var(--emerald); }
+        .player-card:nth-child(3) .growth { color: var(--golden); }
+        .player-card:nth-child(4) .growth { color: var(--orange); }
+
+        /* Feature Card */
+        .feature-card {
+            background: var(--primary-bg);
+            border: 2px solid var(--emerald);
+            box-shadow: 0 4px 16px var(--shadow);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Convergence Section */
+        .convergence-diagram {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .circles-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 4px solid;
+            background: var(--primary-bg);
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        .circle.ai {
+            border-color: var(--coral);
+            color: var(--charcoal);
+        }
+
+        .circle.edtech {
+            border-color: var(--emerald);
+            color: var(--charcoal);
+        }
+
+        .circle.hrtech {
+            border-color: var(--golden);
+            color: var(--charcoal);
+        }
+
+        /* Methodology */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .method-card {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-hover);
+        }
+
+        .method-card h4 {
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+
+
+        .source-badge {
+            display: inline-block;
+            background: var(--gray);
+            color: var(--charcoal);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 2px solid var(--charcoal);
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            background: var(--gray);
+            border-top: 1px solid var(--gray-dark);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Accent Bar */
+        .accent-bar {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--emerald), var(--golden));
+            margin: 0 auto 1.5rem;
+            border-radius: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero-content {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .summary-grid,
+            .players-grid,
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .circles-container {
+                flex-direction: column;
+            }
+
+            .circle {
+                width: 150px;
+                height: 150px;
+                font-size: 0.9rem;
+            }
+            
+            .scroll-indicator {
+                display: none;
+            }
+
+            .stat-row {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <nav class="navbar" id="navbar">
+        <a href="#hero">Home</a>
+        <a href="#summary">Summary</a>
+        <a href="#markets">Markets</a>
+        <a href="#players">Players</a>
+        <a href="#opportunities">Opportunities</a>
+        <a href="#convergence">Convergence</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="scroll-indicator"></div>
+        <div class="hero-content">
+            <div class="date-badge">October 2025 • Market Research Report</div>
+            <h1>The <span style="background: linear-gradient(90deg, #FF6B6B, #00D084, #FFC312); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$1.5 Trillion</span> Convergence</h1>
+            <h2>AI × EdTech × HRTech: A Data-Driven Analysis</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.05rem;">Exploring the intersection of three rapidly growing markets and the opportunity they present for innovation in workforce development.</p>
+            <a href="#summary" class="cta-button">Explore the Data</a>
+            <a href="#about" class="cta-button secondary">About This Research</a>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section id="summary">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <h2 class="section-title">Executive Summary</h2>
+            <p class="section-subtitle">Key metrics from our comprehensive analysis of AI, EdTech, and HRTech market convergence</p>
+            
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>$522B</h3>
+                    <p>Combined Market Size (2025)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>$1.5T</h3>
+                    <p>Projected Value by 2030</p>
+                </div>
+                <div class="summary-card">
+                    <h3>29.2%</h3>
+                    <p>AI Market CAGR</p>
+                </div>
+                <div class="summary-card">
+                    <h3>81%</h3>
+                    <p>Skills-Based Hiring Adoption</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Overview -->
+    <section id="markets">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <h2 class="section-title">Market Overview</h2>
+            <p class="section-subtitle">Comparative analysis of market sizes and growth trajectories across AI, EdTech, and HRTech sectors</p>
+            
+            <div class="chart-container">
+                <canvas id="marketChart"></canvas>
+            </div>
+
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem; color: var(--charcoal);">Key Insights</h3>
+                <ul style="list-style-position: inside; color: var(--text-secondary);">
+                    <li style="margin-bottom: 0.5rem;">AI market leading growth with 29.2% CAGR, reaching $1.77T by 2032</li>
+                    <li style="margin-bottom: 0.5rem;">EdTech showing steady 13.3% CAGR with strong regional variations</li>
+                    <li style="margin-bottom: 0.5rem;">HRTech evolving rapidly with 9.2% CAGR driven by skills-based hiring trends</li>
+                    <li>Convergence creating new opportunities at the intersection of these markets</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Players -->
+    <section id="players">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <h2 class="section-title">Key Players &amp; Growth Metrics</h2>
+            <p class="section-subtitle">Leading companies driving innovation and growth in the AI ecosystem</p>
+            
+            <div class="players-grid">
+                <div class="player-card">
+                    <h4>NVIDIA</h4>
+                    <p class="segment">AI Infrastructure</p>
+                    <div class="metric">
+                        <span>2024 Revenue:</span>
+                        <span><strong>$61B</strong></span>
+                    </div>
+                    <div class="metric">
+                        <span>2025 Projected:</span>
+                        <span><strong>$130.5B</strong></span>
+                    </div>
+                    <p class="growth">+114%</p>
+                </div>
+                
+                <div class="player-card">
+                    <h4>OpenAI</h4>
+                    <p class="segment">Generative AI</p>
+                    <div class="metric">
+                        <span>2024 Revenue:</span>
+                        <span><strong>$3.7B</strong></span>
+                    </div>
+                    <div class="metric">
+                        <span>2025 Projected:</span>
+                        <span><strong>$13B</strong></span>
+                    </div>
+                    <p class="growth">+251%</p>
+                </div>
+                
+                <div class="player-card">
+                    <h4>Microsoft Azure</h4>
+                    <p class="segment">Cloud/AI Services</p>
+                    <div class="metric">
+                        <span>2024 Revenue:</span>
+                        <span><strong>$56B</strong></span>
+                    </div>
+                    <div class="metric">
+                        <span>2025 Projected:</span>
+                        <span><strong>$75B</strong></span>
+                    </div>
+                    <p class="growth">+34%</p>
+                </div>
+                
+                <div class="player-card">
+                    <h4>Google AI</h4>
+                    <p class="segment">AI/Cloud</p>
+                    <div class="metric">
+                        <span>2024 Revenue:</span>
+                        <span><strong>$59B</strong></span>
+                    </div>
+                    <div class="metric">
+                        <span>2025 Projected:</span>
+                        <span><strong>$75B</strong></span>
+                    </div>
+                    <p class="growth">+27%</p>
+                </div>
+            </div>
+
+            <div class="chart-container" style="margin-top: 3rem;">
+                <canvas id="playersChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Opportunities -->
+    <section id="opportunities">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <h2 class="section-title">Regional Spotlight: Africa</h2>
+            <p class="section-subtitle">Emerging markets present significant growth opportunities, particularly in education technology</p>
+            
+            <div class="feature-card">
+                <h3>Africa EdTech Opportunity</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">The African EdTech market is experiencing explosive growth, outpacing global averages and presenting unique opportunities for innovation at the convergence of AI, education, and workforce development.</p>
+                
+                <div class="stat-row">
+                    <div class="stat">
+                        <div class="stat-value">19.2%</div>
+                        <div class="stat-label">Africa EdTech CAGR</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">$3.4B</div>
+                        <div class="stat-label">2024 Market Size</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">$19.8B</div>
+                        <div class="stat-label">Projected 2034</div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-secondary); font-style: italic; margin-top: 2rem;">Note: Africa's EdTech CAGR (19.2%) significantly outpaces the global average (13.3%), indicating a rapidly maturing market with substantial growth potential. This is particularly relevant for projects targeting skill development and workforce training in emerging economies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Convergence Thesis -->
+    <section id="convergence">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <h2 class="section-title">The Convergence Thesis</h2>
+            <p class="section-subtitle">Where AI-powered learning meets skills-based hiring in the future of work</p>
+            
+            <div class="convergence-diagram">
+                <div class="circles-container">
+                    <div class="circle ai">
+                        <div>
+                            <strong>AI</strong><br>
+                            $1.77T by 2032<br>
+                            29.2% CAGR
+                        </div>
+                    </div>
+                    <div class="circle edtech">
+                        <div>
+                            <strong>EdTech</strong><br>
+                            $348B by 2030<br>
+                            13.3% CAGR
+                        </div>
+                    </div>
+                    <div class="circle hrtech">
+                        <div>
+                            <strong>HRTech</strong><br>
+                            $82B by 2032<br>
+                            9.2% CAGR
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: var(--gray); border-radius: 12px; border: 1px solid var(--gray-dark);">
+                    <h3 style="margin-bottom: 1rem; text-align: center; color: var(--charcoal);">The Opportunity</h3>
+                    <p style="color: var(--text-secondary); text-align: center; max-width: 800px; margin: 0 auto;">
+                        The convergence of these three markets creates a unique opportunity for platforms that leverage AI to deliver personalized education while connecting learners directly to skills-based employment opportunities. With 81% of organizations adopting skills-based hiring practices, there's a clear market need for solutions that bridge the gap between learning and employment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section id="methodology">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <h2 class="section-title">Research Methodology</h2>
+            <p class="section-subtitle">Our analysis draws from comprehensive market research, industry reports, and publicly available financial data</p>
+            
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h4>Market Reports</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Industry analysis from leading research firms</p>
+                </div>
+                <div class="method-card">
+                    <h4>Financial Data</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Public company filings and earnings reports</p>
+                </div>
+                <div class="method-card">
+                    <h4>Industry Sources</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">News, trends, and expert analysis</p>
+                </div>
+                <div class="method-card">
+                    <h4>Trend Analysis</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Historical data and growth projections</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <div class="source-badge">98+ Sources Analyzed</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="accent-bar"></div>
+            <div class="about-content">
+                <h2 style="margin-bottom: 1rem; color: var(--charcoal);">About This Research</h2>
+                <p>
+                    This analysis was conducted as part of ongoing research into the convergence of AI, education technology, and workforce development. The findings inform a broader project exploring innovative solutions at the intersection of these markets, with a particular focus on emerging opportunities in high-growth regions.
+                </p>
+                <p style="margin-bottom: 3rem;">
+                    The research combines quantitative market analysis with qualitative insights into industry trends, aiming to identify white space opportunities where technology can address real workforce challenges.
+                </p>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="https://github.com/yourusername/market-analysis" target="_blank" class="cta-button">View on GitHub</a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="cta-button secondary">Connect on LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="accent-bar"></div>
+                <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 1rem;">&copy; 2025 Market Research Analysis</p>
+                <p style="margin-bottom: 0.5rem;">Data compiled from 98+ publicly available sources</p>
+                <p style="font-size: 0.8rem; margin-top: 1rem;">Note: All projections are based on current market trends and should not be considered investment advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Floating Navbar
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 500) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Market Overview Chart
+        const marketCtx = document.getElementById('marketChart').getContext('2d');
+        new Chart(marketCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2024', '2025', '2030', '2032'],
+                datasets: [
+                    {
+                        label: 'AI Market ($B)',
+                        data: [233.46, 294.16, 1060, 1770],
+                        backgroundColor: 'rgba(255, 107, 107, 0.15)',
+                        borderColor: '#FF6B6B',
+                        borderWidth: 2,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'EdTech Market ($B)',
+                        data: [163.49, 184.7, 348.41, null],
+                        backgroundColor: 'rgba(0, 208, 132, 0.15)',
+                        borderColor: '#00D084',
+                        borderWidth: 2,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'HRTech Market ($B)',
+                        data: [40.45, 43.66, null, 81.84],
+                        backgroundColor: 'rgba(255, 195, 18, 0.15)',
+                        borderColor: '#FFC312',
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#2C3E50',
+                            font: {
+                                size: 13,
+                                family: 'Inter',
+                                weight: '600'
+                            },
+                            padding: 15,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#FFFFFF',
+                        titleColor: '#2C3E50',
+                        bodyColor: '#7F8C8D',
+                        borderColor: '#ECF0F1',
+                        borderWidth: 2,
+                        padding: 12,
+                        displayColors: true,
+                        boxPadding: 6,
+                        titleFont: {
+                            size: 14,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            size: 13
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#7F8C8D',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return '$' + value + 'B';
+                            }
+                        },
+                        grid: {
+                            color: '#ECF0F1',
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#7F8C8D',
+                            font: {
+                                size: 12,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Key Players Chart
+        const playersCtx = document.getElementById('playersChart').getContext('2d');
+        new Chart(playersCtx, {
+            type: 'line',
+            data: {
+                labels: ['2024', '2025'],
+                datasets: [
+                    {
+                        label: 'NVIDIA',
+                        data: [61, 130.5],
+                        borderColor: '#FF6B6B',
+                        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#FF6B6B',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'OpenAI',
+                        data: [3.7, 13],
+                        borderColor: '#00D084',
+                        backgroundColor: 'rgba(0, 208, 132, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#00D084',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Microsoft Azure',
+                        data: [56, 75],
+                        borderColor: '#FFC312',
+                        backgroundColor: 'rgba(255, 195, 18, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#FFC312',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Google AI',
+                        data: [59, 75],
+                        borderColor: '#FF9F43',
+                        backgroundColor: 'rgba(255, 159, 67, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#FF9F43',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#2C3E50',
+                            font: {
+                                size: 13,
+                                family: 'Inter',
+                                weight: '600'
+                            },
+                            padding: 15,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#FFFFFF',
+                        titleColor: '#2C3E50',
+                        bodyColor: '#7F8C8D',
+                        borderColor: '#ECF0F1',
+                        borderWidth: 2,
+                        padding: 12,
+                        boxPadding: 6,
+                        titleFont: {
+                            size: 14,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            size: 13
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#7F8C8D',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return '$' + value + 'B';
+                            }
+                        },
+                        grid: {
+                            color: '#ECF0F1',
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#7F8C8D',
+                            font: {
+                                size: 12,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
