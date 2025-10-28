@@ -1,5 +1,5 @@
-Company,2024_Revenue_B,2025_Revenue_B,Growth_Rate_%,Primary_Segment
+Company,FY2024_Revenue_B,FY2025_Revenue_B,Growth_Rate_%,Primary_Segment
 NVIDIA,61.0,130.5,114,AI Infrastructure
-OpenAI,3.7,13.0,251,Generative AI
 Microsoft Azure,56.0,75.0,34,Cloud/AI Services
+OpenAI,3.7,13.0,251,Generative AI
 Google AI,59.0,75.0,27,AI/Cloud
