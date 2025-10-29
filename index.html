@@ -100,6 +100,176 @@
         .summary-card:nth-child(3) h3 { animation-delay: 0.3s; }
         .summary-card:nth-child(4) h3 { animation-delay: 0.4s; }
 
+        /* GLASSMORPHIC navbar + responsive collapse */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(8px) saturate(120%);
+            -webkit-backdrop-filter: blur(8px) saturate(120%);
+            border: 1px solid rgba(255,255,255,0.35);
+            box-shadow: 0 8px 30px rgba(44,62,80,0.08);
+            border-radius: 999px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.25s ease;
+        }
+
+        /* inner menu container (keeps desktop layout same) */
+        .navbar .navbar-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* Hamburger toggle - hidden on desktop */
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        /* simple bars */
+        .nav-toggle .bar,
+        .nav-toggle .bar::before,
+        .nav-toggle .bar::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--charcoal);
+            border-radius: 2px;
+        }
+        .nav-toggle .bar { position: relative; }
+        .nav-toggle .bar::before,
+        .nav-toggle .bar::after {
+            position: absolute;
+            left: 0;
+        }
+        .nav-toggle .bar::before { top: -7px; }
+        .nav-toggle .bar::after  { top: 7px; }
+
+        /* When open we show the mobile menu */
+        .navbar.open .nav-toggle .bar { background: transparent; }
+        .navbar.open .nav-toggle .bar::before { transform: translateY(7px) rotate(45deg); top: 0; }
+        .navbar.open .nav-toggle .bar::after  { transform: translateY(-7px) rotate(-45deg); top: 0; }
+
+        /* Mobile: collapse behavior */
+        @media (max-width: 768px) {
+            .navbar {
+                left: 16px;
+                right: 16px;
+                transform: translateX(0) translateY(0);
+                border-radius: 14px;
+                padding: 8px 12px;
+                justify-content: space-between;
+            }
+
+            .nav-toggle { display: inline-flex; }
+
+            /* hide full menu by default on mobile */
+            .navbar .navbar-menu {
+                display: none;
+                position: absolute;
+                top: calc(100% + 10px);
+                right: 16px;
+                left: 16px;
+                background: rgba(255,255,255,0.68);
+                backdrop-filter: blur(10px) saturate(120%);
+                -webkit-backdrop-filter: blur(10px) saturate(120%);
+                border-radius: 12px;
+                padding: 10px;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 12px 30px rgba(44,62,80,0.08);
+                border: 1px solid rgba(44,62,80,0.06);
+            }
+
+            /* open state */
+            .navbar.open .navbar-menu { display: flex; }
+
+            /* make links full-bleed touch targets */
+            .navbar .navbar-menu a {
+                display: block;
+                padding: 8px 12px;
+                border-radius: 8px;
+            }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral) 0%, var(--emerald) 50%, var(--golden) 100%);
+            width: 0;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Card Base */
+        .glass-card {
+            background: var(--primary-bg);
+            border: 1px solid var(--gray);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Number Animation */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .summary-card h3 {
+            animation: countUp 0.6s ease-out forwards;
+        }
+
+        .summary-card:nth-child(1) h3 { animation-delay: 0.1s; }
+        .summary-card:nth-child(2) h3 { animation-delay: 0.2s; }
+        .summary-card:nth-child(3) h3 { animation-delay: 0.3s; }
+        .summary-card:nth-child(4) h3 { animation-delay: 0.4s; }
+
         /* Floating Navbar */
         .navbar {
             position: fixed;
@@ -668,13 +838,19 @@
 <body>
     <div class="progress-bar" id="progressBar"></div>
     
-    <nav class="navbar" id="navbar">
-        <a href="#hero">Home</a>
-        <a href="#summary">Summary</a>
-        <a href="#markets">Markets</a>
-        <a href="#players">Players</a>
-        <a href="#opportunities">Opportunities</a>
-        <a href="#convergence">Convergence</a>
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navbarMenu" aria-label="Toggle menu">
+            <span class="bar"></span>
+        </button>
+
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="#hero">Home</a>
+            <a href="#summary">Summary</a>
+            <a href="#markets">Markets</a>
+            <a href="#players">Players</a>
+            <a href="#opportunities">Opportunities</a>
+            <a href="#convergence">Convergence</a>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -1235,6 +1411,38 @@
                 }
             }
         });
+
+        // Navbar collapse toggle (keeps existing scroll behavior intact)
+        (function(){
+            const navToggle = document.getElementById('navToggle');
+            const navbar = document.getElementById('navbar');
+
+            if (!navToggle || !navbar) return;
+
+            navToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = navbar.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navbar.contains(e.target)) {
+                    if (navbar.classList.contains('open')) {
+                        navbar.classList.remove('open');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // Reset on resize (desktop > mobile)
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && navbar.classList.contains('open')) {
+                    navbar.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
 
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
